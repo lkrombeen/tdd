@@ -1,14 +1,14 @@
 class Product {
-    constructor(notificationService, stockManagementService) {
-        this.notificationService = notificationService;
-        this.stockManagementService = stockManagementService;
-    }
-
-    buy(quantity) {
-        if (this.stockManagementService.bringsBelowThreshold(this, quantity)) {
-            this.notificationService.sendEvent();
-        }
-    }
+    id;
+    make;
+    range;
+    model;
+    description;
+    price;
+    stock;
+    rackspace;
+    leadTime;
+    minOrder;
 }
 
-module.exports = [Product]
+module.exports = {Product}

@@ -1,5 +1,5 @@
 const assert = require("assert")
-const [Product] = require("../../src/product")
+const {ProductService} = require("../../src/product_service")
 
 describe("a sale is made that reduces the stock to its restock level", () => {
     const notificationService = {
@@ -8,7 +8,6 @@ describe("a sale is made that reduces the stock to its restock level", () => {
             this.hasSentEvent = true;
         }
     }
-
     const stockManagementService = {
         quantity: 0,
         productId: 0,
@@ -19,9 +18,29 @@ describe("a sale is made that reduces the stock to its restock level", () => {
             return true;
         }
     }
+    const guitarShopServiceClient = {
+        getProduct: function (productId) {
+            return {
+                id: productId,
+                make: "Epiphone",
+                range: "Les Paul",
+                model: "Les Paul Classic",
+                description: "Epiphone Les Paul Classic In Worn Heritage Cherry Sunburst",
+                price: 399,
+                stock: 27,
+                rackspace: 30,
+                leadTime: 14,
+                minOrder: 20
+            }
+        },
+        getTotal: function (productId, startDate, endDate) {
+            this.productId = productId;
+            return {productID: productId, startDate: "6/28/2020", endDate: "7/27/2020", total: 15}
+        }
+    }
 
-    const product = new Product(notificationService, stockManagementService);
-    product.buy(2);
+    const productService = new ProductService(notificationService, stockManagementService, guitarShopServiceClient);
+    productService.buy(811, 2);
 
     it("sends an event", () => {
         assert.strictEqual(notificationService.hasSentEvent, true)
