@@ -1,11 +1,21 @@
 const assert = require("assert")
 
-function convert(input){
-    return "I";
+function convert(inputNum){
+    let output = ""
+    for (let i = 0; i < inputNum; i++) {
+        output += "I"
+    }
+    return output
 }
 
 describe("Converts integers into roman numbers", () => {
-    it('should convert 1 into I', function () {
-        assert.strictEqual(convert(1), "I")
-    });
+    [
+        {input: 1, expected: "I"},
+        {input: 2, expected: "II"},
+        {input: 3, expected: "III"},
+    ].forEach(({input, expected}) => {
+        it(`should convert ${input} into ${expected}`, function () {
+            assert.strictEqual(convert(input), expected)
+        });
+    })
 })
