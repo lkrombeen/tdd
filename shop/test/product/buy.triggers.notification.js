@@ -39,7 +39,13 @@ describe("a sale is made that reduces the stock to its restock level", () => {
         }
     }
 
-    const productService = new ProductService(notificationService, stockManagementService, guitarShopServiceClient);
+    const dateService = {
+        getToday: function () {
+            return new Date();
+        }
+    }
+
+    const productService = new ProductService(notificationService, stockManagementService, guitarShopServiceClient, dateService);
     productService.buy(811, 2);
 
     it("sends an event", () => {

@@ -40,9 +40,15 @@ describe("Buy a product", () => {
             }
         }
 
+        const dateService = {
+            getToday: function () {
+                return new Date();
+            }
+        }
+
         describe("a sale is made that does not reduce it to its restock level", () => {
 
-            const productService = new ProductService(notificationService, stockManagementService, guitarShopServiceClient);
+            const productService = new ProductService(notificationService, stockManagementService, guitarShopServiceClient, dateService);
             productService.buy(811, 2);
 
             it(`sends no event`, () => {
