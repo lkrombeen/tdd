@@ -1,20 +1,24 @@
 const assert = require("assert")
 
 function convert(inputNum){
-    if (inputNum === 4){
-        return "IV"
-    }
-    if (inputNum === 5){
-        return "V"
-    }
-    if (inputNum === 6){
-        return "VI"
+    let output = "";
+
+    let romanNumerals = ["V", "IV", "I"];
+    let romansMapped = [5, 4, 1];
+
+    let index = 0;
+    while (inputNum > 0) {
+        const mappedVal = romanNumerals[index];
+        const mappedNum = romansMapped[index];
+        if (inputNum >= mappedNum){
+            inputNum -= mappedNum;
+            output += mappedVal
+        }
+        else {
+            index += 1
+        }
     }
 
-    let output = ""
-    for (let i = 0; i < inputNum; i++) {
-        output += "I"
-    }
     return output
 }
 
