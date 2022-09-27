@@ -22,14 +22,14 @@ function convertToRoman(inputNum) {
 function convertToInt(strVal) {
     let sum = 0;
 
-    let romans = ["I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"]
-    let numbers = [1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000]
+    let reverseRomans = romans.slice().reverse();
+    let reverseNumerals = numerals.slice().reverse();
 
     while (strVal.length > 0) {
         let didChange = false;
-        for (let i = 0; i < romans.length; i++) {
-            const roman = romans[i];
-            const numRep = numbers[i];
+        for (let i = 0; i < reverseRomans.length; i++) {
+            const roman = reverseRomans[i];
+            const numRep = reverseNumerals[i];
 
             if (strVal.endsWith(roman)) {
                 sum += numRep;
